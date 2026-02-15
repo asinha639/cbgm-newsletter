@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//CBGM//Newsletter//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:cbgm-seminar-20260116-0900@augusta.edu
+DTSTAMP:20260101T120000Z
+DTSTART:20260116T140000Z
+DTEND:20260116T150000Z
+SUMMARY:Center for Biotechnology & Genomic Medicine Seminar
+LOCATION:CA 2109
+DESCRIPTION:CBGM Seminar at Augusta University (Georgia Cancer Center).\\n\\nMore info: https://asinha639.github.io/cbgm-newsletter/
+END:VEVENT
+END:VCALENDAR

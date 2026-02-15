@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Christmas Potluck 2025 – Photos</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div class="wrap gallery-page" style="padding: 28px 18px;">
+<a class="link" href="index.html#photos">← Back to Newsletter</a>
+
+<h1 style="margin-top:16px;">Christmas Potluck 2025</h1>
+<p class="muted">Event Photos</p>
+
+<section class="carousel">
+  <button class="nav prev" type="button" aria-label="Previous photo">‹</button>
+
+  <div class="carousel-hero">
+    <img id="heroImage"
+         src="images/Christmas Potluck 2025/IMG_3876.jpeg"
+         alt="Christmas Potluck 2025 featured photo">
+  </div>
+
+  <button class="nav next" type="button" aria-label="Next photo">›</button>
+</section>
+
+<section class="carousel-thumbs" aria-label="Photo thumbnails">
+  <button class="thumb is-active" type="button" data-src="images/Christmas Potluck 2025/IMG_3876.jpeg">
+    <img src="images/Christmas Potluck 2025/IMG_3876.jpeg" alt="Thumbnail 1">
+  </button>
+
+  <button class="thumb" type="button" data-src="images/Christmas Potluck 2025/IMG_3880.jpeg">
+    <img src="images/Christmas Potluck 2025/IMG_3880.jpeg" alt="Thumbnail 2">
+  </button>
+
+  <button class="thumb" type="button" data-src="images/Christmas Potluck 2025/IMG_3885.jpeg">
+    <img src="images/Christmas Potluck 2025/IMG_3885.jpeg" alt="Thumbnail 3">
+  </button>
+
+  <button class="thumb" type="button" data-src="images/Christmas Potluck 2025/IMG_3894.jpeg">
+    <img src="images/Christmas Potluck 2025/IMG_3894.jpeg" alt="Thumbnail 4">
+  </button>
+
+  <button class="thumb" type="button" data-src="images/Christmas Potluck 2025/IMG_3897.jpeg">
+    <img src="images/Christmas Potluck 2025/IMG_3897.jpeg" alt="Thumbnail 5">
+  </button>
+</section>
+
+<script>
+  const images = [
+    "images/Christmas Potluck 2025/IMG_3876.jpeg",
+    "images/Christmas Potluck 2025/IMG_3880.jpeg",
+    "images/Christmas Potluck 2025/IMG_3885.jpeg",
+    "images/Christmas Potluck 2025/IMG_3894.jpeg",
+    "images/Christmas Potluck 2025/IMG_3897.jpeg"
+  ];
+
+  const hero = document.getElementById("heroImage");
+  const thumbs = Array.from(document.querySelectorAll(".thumb"));
+  const prevBtn = document.querySelector(".prev");
+  const nextBtn = document.querySelector(".next");
+
+  let index = 0;
+
+  function setActive(i){
+    index = (i + images.length) % images.length;  // wrap around
+    hero.src = images[index];
+
+    thumbs.forEach((t, idx) => {
+      t.classList.toggle("is-active", idx === index);
+    });
+  }
+
+  prevBtn.addEventListener("click", () => setActive(index - 1));
+  nextBtn.addEventListener("click", () => setActive(index + 1));
+
+  thumbs.forEach((btn, i) => {
+    btn.addEventListener("click", () => setActive(i));
+  });
+
+  // optional: keyboard arrows
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") setActive(index - 1);
+    if (e.key === "ArrowRight") setActive(index + 1);
+  });
+</script>
+
+  </div>
+</body>
+</html>

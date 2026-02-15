@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!--
+    CBGM Newsletter (static HTML)
+    - Single-page newsletter with anchored sections.
+    - Companion “Show more” pages (photos/event galleries) reuse the same CSS.
+  -->
+  <title>CBGM Newsletter – January 2026</title>
+  <meta name="description" content="Center for Biotechnology and Genomic Medicine (CBGM) Newsletter – Augusta University" />
+
+  <!-- Fonts (fix: use proper querystring separators) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- =======================================================
+       Sticky top bar (brand + issue meta)
+       ======================================================= -->
+  <div class="topbar" role="banner">
+    <div class="wrap topbar-inner">
+      <div class="brand" aria-label="CBGM branding">
+        <img class="logo" src="images/logo.png" alt="CBGM logo" />
+
+        <div class="brand-text">
+          <div class="brand-org">Center for Biotechnology and Genomic Medicine</div>
+          <div class="brand-unit">Augusta University</div>
+        </div>
+      </div>
+
+      <div class="topbar-meta" aria-label="Issue metadata">
+        <span class="pill">Quarterly Newsletter</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- =======================================================
+       Hero / Table of Contents
+       ======================================================= -->
+  <header class="hero">
+    <div class="wrap hero-inner">
+      <div class="hero-card">
+        <!-- Small brand link at the top of the hero card -->
+        <div class="hero-kicker">
+          <a
+            class="cbgm-link"
+            href="https://www.augusta.edu/centers/cbgm/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            CBGM
+          </a>
+        </div>
+
+        <h1 class="hero-title">Newsletter</h1>
+        <p class="hero-subtitle">
+          A curated overview of research, people, achievements, and opportunities shaping the work of <strong>CBGM</strong>.
+        </p>
+
+        <!-- Anchor chips for quick navigation -->
+        <nav class="toc" aria-label="Newsletter sections">
+          <a class="chip" href="#chairs-note">Chair’s Note</a>
+          <a class="chip" href="#spotlight">Spotlight</a>
+          <a class="chip" href="#events">Events</a>
+          <a class="chip" href="#scholarship">Scholarship &amp; Presentations</a>
+          <a class="chip" href="#personal-achievements">Personal Achievements</a>
+          <a class="chip" href="#grants">Grant Opportunities</a>
+          <a class="chip" href="#photos">Photos</a>
+        </nav>
+      </div>
+
+      <!-- Right-side “stats” cards -->
+      <aside class="hero-side" aria-label="Issue quick facts">
+        <div class="stat">
+          <div class="stat-label">Issue</div>
+          <div class="stat-value">January 2026</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-label">Published by</div>
+          <div class="stat-value">
+            <a
+              class="cbgm-link"
+              href="https://www.augusta.edu/centers/cbgm/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              CBGM
+            </a>
+          </div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-label">Share</div>
+          <div class="stat-value">
+            <a
+              class="cbgm-link share-link"
+              href="https://asinha639.github.io/cbgm-newsletter/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              https://asinha639.github.io/cbgm-newsletter/
+            </a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <!-- =======================================================
+       Main content
+       ======================================================= -->
+  <main class="wrap content" id="top">
+
+    <!-- =====================
+         Chair’s Note
+         ===================== -->
+    <section class="card" id="chairs-note">
+      <div class="card-head">
+        <h2>Chair’s Note</h2>
+        <span class="tag">Message</span>
+      </div>
+
+      <p class="muted chairs-byline">
+        <a
+          class="cbgm-link"
+          href="https://www.augusta.edu/faculty/directory/view.php?id=RMCINDOE"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Dr. Richard McIndoe
+        </a>
+        , Director, Center for Biotechnology and Genomic Medicine
+      </p>
+
+      <!-- Feature block: headshot (left) + message (right) -->
+      <div class="feature feature--horizontal">
+        <img
+          class="spotlight-image chair-image"
+          src="images/richard-mcindoe.jpg"
+          alt="Dr. Richard McIndoe"
+        />
+
+        <div class="feature-text">
+          <div class="feature-title">Welcome from the Chair</div>
+          <p>
+            [Write a short welcome message here. This can be one or two paragraphs introducing the issue,
+            acknowledging the community, and setting the tone for the newsletter.]
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================
+         Two-column section
+         ===================== -->
+    <!-- <section class="grid two" aria-label="Spotlight and Events"> -->
+
+      <!-- =====================
+           Spotlight
+           ===================== -->
+      <section class="card" id="spotlight">
+        <div class="card-head">
+          <h2>Spotlight</h2>
+          <span class="tag">Student / Faculty</span>
+        </div>
+
+        <div class="feature feature--vertical">
+          <img
+            class="spotlight-image"
+            src="images/spotlight_Q1_2026.jpg"
+            alt="CBGM Newsletter Committee"
+          />
+
+          <div class="feature-text">
+            <div class="feature-title">Newsletter Committee, CBGM</div>
+            <p class="muted">
+              A dedicated group of students, staff, and trainees working together to create a shared space for
+              communication, recognition, and connection within CBGM.
+            </p>
+          </div>
+        </div>
+
+        <p class="mt">
+          This inaugural newsletter is the result of collaboration, creativity, and a shared belief that the work of our
+          community deserves to be seen and celebrated. The Newsletter Committee came together with a simple goal: to
+          build a platform that highlights people, research, and opportunities across CBGM in a way that feels inclusive
+          and meaningful. From shaping the structure and design to gathering stories and ideas, the committee invested
+          time and care to ensure this newsletter reflects the spirit of our center. Their initiative marks an important
+          step toward strengthening communication and connection across CBGM, and sets the foundation for future issues
+          to grow and evolve with the community.
+        </p>
+      </section>
+
+      <!-- =====================
+           Events
+           ===================== -->
+
+            <section class="card" id="events">
+        <div class="card-head">
+          <h2>Events</h2>
+          <span class="tag">Upcoming</span>
+        </div>
+
+        <div class="list" role="list">
+          <!-- Event item -->
+
+          <!-- 16 January 2026 -->
+
+          <div class="list-item" role="listitem">
+            <div class="when">Jan 16</div>
+
+            <div class="what">
+              <div class="title">Center for Biotechnology and Genomic Medicine Seminar</div>
+              <div class="muted">CA 2109 • 9:00 AM</div>
+            </div>
+
+            <!-- Right-side actions: Details + Add to Calendar (Outlook) -->
+            <div class="event-actions" aria-label="Event actions">
+              <details class="event-details">
+                <summary class="link">Details</summary>
+
+                <div class="event-body">
+                  <div class="event-meta">
+                    <div><strong>Friday, January 16, 2026</strong> at <strong>9:00 a.m.</strong></div>
+                    <div><strong>Location:</strong> CA 2109</div>
+                  </div>
+
+                  <div class="event-talk">
+                    <div class="muted">Talk title</div>
+                    <div class="event-title">
+                      “A synergistic therapeutic nano-eyedrop for dry eye disease based on ascorbic acid-coupled exosomes”
+                    </div>
+                  </div>
+
+                  <div class="event-links">
+                    <div class="muted">Link</div>
+                    <a
+                      class="event-url"
+                      href="https://pubs.rsc.org/en/content/articlelanding/2023/nr/d2nr05178h"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      https://pubs.rsc.org/en/content/articlelanding/2023/nr/d2nr05178h
+                    </a>
+                  </div>
+
+                  <div class="speaker">
+                    <div class="muted">Speaker</div>
+                    <div class="speaker-name">Richard Kontoh-Twumasi</div>
+                    <div class="muted">
+                      Graduate Research Assistant<br />
+                      Shruti Sharma Lab<br />
+                      Center for Biotechnology and Genomic Medicine<br />
+                      Augusta University
+                    </div>
+                  </div>
+                </div>
+              </details>
+
+              <!--
+                Outlook “compose event” deep link (web).
+                Notes:
+                - startdt/enddt are local datetimes. Adjust end time/duration as needed.
+                - Body text should be URL-encoded.
+              -->
+              <a
+                class="link"
+                href="https://outlook.office.com/calendar/0/deeplink/compose?subject=CBGM%20Seminar&startdt=2026-01-16T09:00:00&enddt=2026-01-16T10:00:00&location=CA%202109&body=A%20synergistic%20therapeutic%20nano-eyedrop%20for%20dry%20eye%20disease%20based%20on%20ascorbic%20acid-coupled%20exosomes%0ASpeaker%3A%20Richard%20Kontoh-Twumasi"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Add to calendar
+              </a>
+            </div>
+          </div>
+
+          <!-- 23 January 2026 -->
+
+         <div class="list-item" role="listitem">
+            <div class="when">Jan 23</div>
+
+            <div class="what">
+              <div class="title">Center for Biotechnology and Genomic Medicine Seminar</div>
+              <div class="muted">CA 2109 • 9:00 AM</div>
+            </div>
+
+            <!-- Right-side actions: Details + Add to Calendar (Outlook) -->
+            <div class="event-actions" aria-label="Event actions">
+              <details class="event-details">
+                <summary class="link">Details</summary>
+
+                <div class="event-body">
+                  <div class="event-meta">
+                    <div><strong>Friday, January 23, 2026</strong> at <strong>9:00 a.m.</strong></div>
+                    <div><strong>Location:</strong> CA 2109</div>
+                  </div>
+
+                  <div class="event-talk">
+                    <div class="muted">Talk title</div>
+                    <div class="event-title">
+                      “A Novel Artificial Intelligence Model for Personalized Medicine: Predicting Synergistic Drug Combinations in Cancer Using Graph Attention Networks and Virtual Laboratory Intelligence”
+                    </div>
+                  </div>
+
+                  <div class="speaker">
+                    <div class="muted">Speaker</div>
+                    <div class="speaker-name">Trudie Gritter</div>
+                    <div class="muted">
+                      Graduate Research Assistant<br />
+                      Richard McIndoe Lab<br />
+                      Center for Biotechnology and Genomic Medicine<br />
+                      Augusta University
+                    </div>
+                  </div>
+                </div>
+              </details>
+
+              <!--
+                Outlook “compose event” deep link (web).
+                Notes:
+                - startdt/enddt are local datetimes. Adjust end time/duration as needed.
+                - Body text should be URL-encoded.
+              -->
+              <a
+                class="link"
+                href="https://outlook.office.com/calendar/0/deeplink/compose?subject=CBGM%20Seminar%20-%20AI%20in%20Personalized%20Medicine&startdt=2026-01-23T09:00:00&enddt=2026-01-23T10:00:00&location=CA%202109&body=A%20Novel%20Artificial%20Intelligence%20Model%20for%20Personalized%20Medicine%3A%0APredicting%20Synergistic%20Drug%20Combinations%20in%20Cancer%20Using%20Graph%20Attention%20Networks%20and%20Virtual%20Laboratory%20Intelligence%0ASpeaker%3A%20Trudie%20Gritter"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Add to calendar
+              </a>
+            </div>
+          </div>
+          
+          <!-- Placeholder event item -->
+          <div class="list-item" role="listitem">
+            <div class="when">Feb 04</div>
+            <div class="what">
+              <div class="title">[Event title]</div>
+              <div class="muted">[Location / Zoom] • [Time]</div>
+            </div>
+            <a class="link" href="#" target="_blank" rel="noopener noreferrer">Details</a>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- =====================
+         Scholarship & Presentations
+         ===================== -->
+    <section class="card" id="scholarship">
+      <div class="card-head">
+        <h2>Scholarship &amp; Presentations</h2>
+        <span class="tag">Publications • Presentations • Talks</span>
+      </div>
+
+      <div class="scholarship-list">
+        <!-- Publication -->
+        <article class="scholarship-item">
+          <div class="scholarship-text">
+            Rivera-Caraballo KA, <strong>Lee TJ</strong>, <strong>Sinha A</strong>, Orecchioni M, Pacholczyk R,
+            Vázquez-Arreguín K, <strong>Sharma S</strong>, Jones K, Vemuri K, Sahu U, Murphy SA, Hong B,
+            Kolhe R, <strong>Sharma A</strong>, Kaur B.
+            <em>
+              Oncolytic HSV-1-mediated JAG1 blockade induces glioma senescence-associated secretory phenotype to increase
+              macrophage activation and cetuximab-mediated senolysis.
+            </em>
+            <span class="muted">Cancer Research, 2025.</span>
+            <a class="pub-link" href="https://doi.org/10.1158/0008-5472.CAN-25-1402" target="_blank" rel="noopener noreferrer">DOI</a>
+          </div>
+        </article>
+
+        <!-- Poster presentation (with action button) -->
+        <article class="scholarship-item scholarship-item--action">
+          <div class="scholarship-text">
+            <strong>Arnoneel Sinha</strong>, <strong>Richard McIndoe</strong>.
+            <em>cellivista: An Interactive Seurat-Based R Shiny App for Single-Cell RNA-seq Analysis.</em>
+            <span class="muted">Health Sciences Fair and Expo, Augusta University, GA, 2025.</span>
+            <span class="muted">(Poster presentation)</span>
+          </div>
+
+          <a class="achievement-btn" href="health-sciences-expo-2025.html">View poster photos</a>
+        </article>
+
+        <!-- Core Fair (with action button) -->
+        <article class="scholarship-item scholarship-item--action">
+          <div class="scholarship-text">
+            <strong>Dr. Tae Jin Lee</strong> and <strong>Dr. Arnoneel Sinha</strong> attended the <em>Core Fair</em> at the
+            <strong>Georgia Cancer Center</strong>, Augusta University, representing the <strong>Bioinformatics Core of CBGM</strong>.
+            <span class="muted">(2025)</span>
+          </div>
+
+          <a class="achievement-btn" href="core-fair-2025.html">View event photo</a>
+        </article>
+
+        <!-- Placeholder -->
+        <article class="scholarship-item">
+          <div class="scholarship-text">
+            <strong>[Name]</strong> <span class="muted">presented</span>
+            <em>[Talk title]</em>
+            <span class="muted">([Conference/Seminar], [Month Year])</span>
+            <a class="pub-link" href="#">Link</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- =====================
+         Personal Achievements
+         ===================== -->
+    <section class="card" id="personal-achievements">
+      <div class="card-head">
+        <h2>Personal Achievements</h2>
+        <span class="tag">Milestones • Promotions • Recognition</span>
+      </div>
+
+      <div class="achievement-box">
+        <p class="achievement-text">
+          <strong>
+            <a
+              class="cbgm-link"
+              href="https://www.augusta.edu/faculty/directory/view.php?id=ASSHARMA"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Dr. Ashok Sharma
+            </a>
+          </strong>
+          has recently been promoted to <strong>Professor</strong>, recognizing his sustained excellence in research,
+          mentorship, and service. This milestone reflects his long-standing contributions to CBGM and his impact on
+          advancing scientific discovery and training within the community.
+        </p>
+      </div>
+
+            <div class="achievement-box">
+        <p class="achievement-text">
+          <strong>
+            <a
+              class="cbgm-link"
+              href="https://www.augusta.edu/faculty/directory/view.php?id=ASSHARMA"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Dr. Ashok Sharma
+            </a>
+          </strong>
+          and his <strong>Tear Fluid Proteome Database</strong> project were recently highlighted on X (formerly Twitter) by the Director of the 
+          <strong>National Eye Institute (NIH/NEI)</strong>. This national recognition underscores the impact and translational importance 
+          of his work in advancing ocular research and data accessibility.
+          <br /><br />
+          <a
+            class="cbgm-link"
+            href="https://x.com/NEIDirector/status/2021304691649319162"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View the NIH/NEI Director’s post
+          </a>
+        </p>
+      </div>
+
+    </section>
+
+    <!-- =====================
+         Grant Opportunities
+         ===================== -->
+    <section class="card" id="grants">
+      <div class="card-head">
+        <h2>Grant Opportunities</h2>
+        <span class="tag tag-green">Funding</span>
+      </div>
+
+      <div class="list" role="list">
+        <div class="list-item" role="listitem">
+          <div class="when">Due</div>
+          <div class="what">
+            <div class="title">[Grant name]</div>
+            <div class="muted">Deadline: [date] • Eligibility: [brief]</div>
+          </div>
+          <a class="link" href="#" target="_blank" rel="noopener noreferrer">Apply</a>
+        </div>
+      </div>
+
+      <p class="muted mt">Tip: Add internal submission guidance here (e.g., “Contact [name/email] for internal review.”)</p>
+    </section>
+
+    <!-- =====================
+         Photos
+         ===================== -->
+    <section class="card" id="photos">
+      <div class="card-head">
+        <h2>Photos</h2>
+        <span class="tag">Highlights</span>
+      </div>
+
+      <div class="photo-grid">
+        <!-- Photo of the Quarter -->
+        <article class="photo-tile">
+          <div class="photo-thumb">
+            <img src="images/POTQ_Q1_2026.jpg" alt="Photo of the Quarter" />
+          </div>
+
+          <div class="photo-info">
+            <div class="photo-title">Photo of the Quarter</div>
+            <div class="photo-subtitle">Quarter 1, 2026</div>
+            <a class="photo-btn" href="photo-of-the-quarter.html">Show more</a>
+          </div>
+        </article>
+
+        <!-- Event Photo: Christmas Potluck 2025 -->
+        <article class="photo-tile">
+          <div class="photo-thumb">
+            <img src="images/Christmas Potluck 2025/IMG_3876.jpeg" alt="Christmas Potluck 2025" />
+          </div>
+
+          <div class="photo-info">
+            <div class="photo-title">Christmas Potluck 2025</div>
+            <div class="photo-subtitle">Event Photos</div>
+            <a class="photo-btn" href="christmas-potluck-2025.html">Show more</a>
+          </div>
+        </article>
+
+        <!-- Placeholder tile for the next event -->
+        <article class="photo-tile">
+          <div class="photo-thumb photo-thumb--placeholder">
+            <div class="placeholder-text">Add next event</div>
+          </div>
+
+          <div class="photo-info">
+            <div class="photo-title">Event Photos</div>
+            <div class="photo-subtitle">Coming soon</div>
+            <!-- <a class="photo-btn" href="event-2.html">Show more</a> -->
+          </div>
+        </article>
+      </div>
+    </section>
+
+<!-- =====================
+     Newsletter Committee
+     ===================== -->
+<section class="card" id="committee">
+  <div class="card-head">
+    <h2>Newsletter Committee</h2>
+    <span class="tag">Committee</span>
+  </div>
+
+  <div class="committee-directory">
+
+    <!-- Arnoneel -->
+    <article class="committee-card">
+      <img src="images/committee/Arnoneel-Sinha.jpg" alt="Arnoneel Sinha" />
+
+      <div class="committee-info">
+        <div class="committee-name">Arnoneel Sinha, PhD</div>
+        <div class="committee-role">Newsletter Editor</div>
+        <a class="committee-email"
+           href="mailto:arsinha@augusta.edu">
+           arsinha@augusta.edu
+        </a>
+      </div>
+
+      <div class="committee-quote">
+        “Be the change you wish to see in the world.” — Mahatma Gandhi
+      </div>
+    </article>
+
+
+    <!-- Trudie -->
+    <article class="committee-card">
+      <img src="images/committee/Trudie-Ritter.jpg" alt="Trudie Ritter" />
+
+      <div class="committee-info">
+        <div class="committee-name">Trudie Ritter</div>
+        <div class="committee-role">Committee Member</div>
+        <a class="committee-email"
+           href="mailto:gritter@augusta.edu">
+           gritter@augusta.edu
+        </a>
+      </div>
+      
+      <div class="committee-quote">
+            “Be yourself; everyone else is already taken.”― Oscar Wilde
+      </div>
+    </article>
+
+
+
+
+    <!-- Victoria -->
+    <article class="committee-card">
+      <img src="images/committee/Victoria-Clifton.jpg" alt="Victoria Clifton" />
+
+      <div class="committee-info">
+        <div class="committee-name">Victoria Clifton</div>
+        <div class="committee-role">Committee Member</div>
+        <a class="committee-email"
+           href="mailto:vclifton@augusta.edu">
+           vclifton@augusta.edu
+        </a>
+      </div>
+
+           <div class="committee-quote">
+            “In three words I can sum up everything I've learned about life: it goes on.”― Robert Frost
+      </div>
+    </article>
+
+
+    <!-- Antonella -->
+    <article class="committee-card">
+      <img src="images/committee/Antonella-Aliste.jpg" alt="Antonella Aliste" />
+
+      <div class="committee-info">
+        <div class="committee-name">Antonella Aliste</div>
+        <div class="committee-role">Committee Member</div>
+        <a class="committee-email"
+           href="mailto:aaliste@augusta.edu">
+           aaliste@augusta.edu
+        </a>
+      </div>
+
+           <div class="committee-quote">
+            “If you tell the truth, you don't have to remember anything.”― Mark Twain
+      </div>
+    </article>
+
+
+    <!-- Saleh -->
+    <article class="committee-card">
+      <img src="images/committee/Saleh-Ahmed.jpg" alt="Saleh Ahmed" />
+
+      <div class="committee-info">
+        <div class="committee-name">Saleh Ahmed</div>
+        <div class="committee-role">Committee Member</div>
+        <a class="committee-email"
+           href="mailto:salahmed@augusta.edu">
+           salahmed@augusta.edu
+        </a>
+      </div>
+
+           <div class="committee-quote">
+            “To be yourself in a world that is constantly trying to make you something else is the greatest accomplishment.”― Ralph Waldo Emerson
+      </div>
+    </article>
+
+  </div>
+</section>
+
+
+
+
+    <!-- =====================
+         Footer
+         ===================== -->
+    <footer class="footer">
+      <div class="muted">© Augusta University • Center for Biotechnology and Genomic Medicine</div>
+    </footer>
+  </main>
+</body>
+</html>

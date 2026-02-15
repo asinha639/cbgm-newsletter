@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Health Sciences Fair and Expo 2025 – Poster Photos</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+
+<body>
+  <div class="wrap gallery-page" style="padding: 28px 18px;">
+    <a class="link" href="index.html#scholarship">← Back to Newsletter</a>
+
+    <h1 style="margin-top:16px;">Health Sciences Fair and Expo 2025</h1>
+    <p class="muted">Poster presentation photos</p>
+
+    <div class="carousel">
+      <button class="nav" id="prev" aria-label="Previous photo">‹</button>
+
+      <div class="carousel-hero">
+        <img id="hero" src="images/Health Sciences Fair and Expo 1.jpeg" alt="Poster photo 1">
+      </div>
+
+      <button class="nav" id="next" aria-label="Next photo">›</button>
+    </div>
+
+    <div class="carousel-thumbs" id="thumbs">
+      <button class="thumb is-active" data-src="images/Health Sciences Fair and Expo 1.jpg" aria-label="Poster photo 1">
+        <img src="images/Health Sciences Fair and Expo 1.jpeg" alt="Poster photo 1 thumbnail">
+      </button>
+
+      <button class="thumb" data-src="images/Health Sciences Fair and Expo 2.jpg" aria-label="Poster photo 2">
+        <img src="images/Health Sciences Fair and Expo 2.jpg" alt="Poster photo 2 thumbnail">
+      </button>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      const images = [
+        "images/Health Sciences Fair and Expo 1.jpeg",
+        "images/Health Sciences Fair and Expo 2.jpg"
+      ];
+
+      let index = 0;
+      const hero = document.getElementById("hero");
+      const thumbs = Array.from(document.querySelectorAll(".thumb"));
+
+      function setActive(i){
+        index = (i + images.length) % images.length;
+        hero.src = images[index];
+
+        thumbs.forEach((t, ti) => {
+          t.classList.toggle("is-active", ti === index);
+        });
+      }
+
+      document.getElementById("prev").addEventListener("click", () => setActive(index - 1));
+      document.getElementById("next").addEventListener("click", () => setActive(index + 1));
+
+      thumbs.forEach((btn, ti) => {
+        btn.addEventListener("click", () => setActive(ti));
+      });
+
+      // keyboard support
+      window.addEventListener("keydown", (e) => {
+        if(e.key === "ArrowLeft") setActive(index - 1);
+        if(e.key === "ArrowRight") setActive(index + 1);
+      });
+    })();
+  </script>
+</body>
+</html>
