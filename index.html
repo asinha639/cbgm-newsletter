@@ -37,7 +37,7 @@
       </div>
 
       <div class="topbar-meta" aria-label="Issue metadata">
-        <span class="pill">Quarterly Newsletter</span>
+        <span class="pill">Quarterly Digital Newsletter</span>
       </div>
     </div>
   </div>
@@ -425,6 +425,21 @@
           <a class="achievement-btn" href="health-sciences-expo-2025.html">View poster photos</a>
         </article>
 
+        <!-- Poster presentation (no action button yet) -->
+<article class="scholarship-item">
+  <div class="scholarship-text">
+    <strong>Trudie Ritter</strong>, <strong>Richard McIndoe</strong>.
+    <em>
+      Advancing a Network-Based Approach for Personalized Drug Synergy Prediction in Cancer: Integrating AI for Future Optimization.
+    </em>
+    <span class="muted">
+      Health Sciences Fair and Expo, Augusta University, GA, 2025.
+    </span>
+    <span class="muted">(Poster presentation)</span>
+  </div>
+</article>
+
+
         <!-- Core Fair (with action button) -->
         <article class="scholarship-item scholarship-item--action">
           <div class="scholarship-text">
@@ -436,15 +451,7 @@
           <a class="achievement-btn" href="core-fair-2025.html">View event photo</a>
         </article>
 
-        <!-- Placeholder -->
-        <article class="scholarship-item">
-          <div class="scholarship-text">
-            <strong>[Name]</strong> <span class="muted">presented</span>
-            <em>[Talk title]</em>
-            <span class="muted">([Conference/Seminar], [Month Year])</span>
-            <a class="pub-link" href="#">Link</a>
-          </div>
-        </article>
+
       </div>
     </section>
 
@@ -622,7 +629,7 @@
       </div>
       
       <div class="committee-quote">
-            “Be yourself; everyone else is already taken.”― Oscar Wilde
+            “Commit to the Lord whatever you do, and He will establish your plans." — Proverbs 16:3
       </div>
     </article>
 
@@ -688,7 +695,295 @@
   </div>
 </section>
 
+    <!-- =======================================
+         Floating Weather Widget (Augusta, GA)
+         ======================================= -->
+  <aside class="weather-float" aria-label="Augusta, GA weather widget">
+    <div class="weather-card" role="region" aria-live="polite">
+      <div class="weather-top">
+        <div class="weather-loc">
+          <div class="weather-kicker">Weather</div>
+          <div class="weather-city">Augusta, GA</div>
+        </div>
+        <div class="weather-badge" title="Auto-refreshes">LIVE</div>
+      </div>
 
+      <div class="weather-main">
+        <div class="weather-icon" id="wxIcon" aria-hidden="true">⛅</div>
+        <div class="weather-temp">
+          <div class="weather-tempValue"><span id="wxTemp">--</span>°F</div>
+          <div class="weather-desc" id="wxDesc">Loading…</div>
+        </div>
+      </div>
+
+      <div class="weather-meta">
+        <div class="wxRow"><span>Feels</span><strong><span id="wxFeels">--</span>°F</strong></div>
+        <div class="wxRow"><span>Humidity</span><strong><span id="wxHum">--</span>%</strong></div>
+        <div class="wxRow"><span>Wind</span><strong><span id="wxWind">--</span> mph</strong></div>
+        <div class="wxRow"><span>Rain</span><strong><span id="wxRain">--</span> in</strong></div>
+      </div>
+
+      <div class="weather-foot">
+        <span class="wxUpdated">Updated: <span id="wxUpdated">--:--</span></span>
+        <button class="wxRefresh" id="wxRefresh" type="button">Refresh</button>
+      </div>
+    </div>
+  </aside>
+
+    <script>
+    (function(){
+      // Augusta, GA (downtown-ish)
+      const LAT = 33.4735;
+      const LON = -82.0105;
+
+      const els = {
+        temp: document.getElementById("wxTemp"),
+        feels: document.getElementById("wxFeels"),
+        hum: document.getElementById("wxHum"),
+        wind: document.getElementById("wxWind"),
+        rain: document.getElementById("wxRain"),
+        desc: document.getElementById("wxDesc"),
+        icon: document.getElementById("wxIcon"),
+        updated: document.getElementById("wxUpdated"),
+        refresh: document.getElementById("wxRefresh"),
+      };
+
+      // Open-Meteo weather code mapping (simplified, nice labels + emoji)
+      function codeToUI(code){
+        // Weather codes: https://open-meteo.com/en/docs
+        const map = [
+          { codes: [0], label: "Clear sky", icon: "☀️" },
+          { codes: [1,2], label: "Mostly clear", icon: "🌤️" },
+          { codes: [3], label: "Overcast", icon: "☁️" },
+          { codes: [45,48], label: "Fog", icon: "🌫️" },
+          { codes: [51,53,55], label: "Drizzle", icon: "🌦️" },
+          { codes: [61,63,65], label: "Rain", icon: "🌧️" },
+          { codes: [66,67], label: "Freezing rain", icon: "🌧️" },
+          { codes: [71,73,75,77], label: "Snow", icon: "🌨️" },
+          { codes: [80,81,82], label: "Rain showers", icon: "🌦️" },
+          { codes: [85,86], label: "Snow showers", icon: "🌨️" },
+          { codes: [95], label: "Thunderstorm", icon: "⛈️" },
+          { codes: [96,99], label: "Thunderstorm (hail)", icon: "⛈️" }
+        ];
+
+        for (const entry of map){
+          if (entry.codes.includes(code)) return entry;
+        }
+        return { label: "Conditions", icon: "⛅" };
+      }
+
+      function cToF(c){ return Math.round((c * 9/5) + 32); }
+      function kmhToMph(kmh){ return Math.round(kmh * 0.621371); }
+      function mmToIn(mm){ return (mm / 25.4).toFixed(2); }
+
+      async function loadWeather(){
+        try{
+          els.desc.textContent = "Loading…";
+
+          // current + hourly (for humidity, precip)
+          const url =
+            `https://api.open-meteo.com/v1/forecast` +
+            `?latitude=${LAT}&longitude=${LON}` +
+            `&current=temperature_2m,apparent_temperature,weather_code,wind_speed_10m` +
+            `&hourly=relative_humidity_2m,precipitation` +
+            `&temperature_unit=celsius&wind_speed_unit=kmh&precipitation_unit=mm&timezone=auto`;
+
+          const res = await fetch(url, { cache: "no-store" });
+          if(!res.ok) throw new Error("Weather fetch failed");
+          const data = await res.json();
+
+          const cur = data.current;
+          const ui = codeToUI(cur.weather_code);
+
+          // Find matching "current hour" index in hourly arrays (for humidity/precip)
+          const tNow = cur.time;
+          const hTimes = data.hourly?.time || [];
+          const hIndex = hTimes.indexOf(tNow);
+
+          const hum = (hIndex >= 0) ? data.hourly.relative_humidity_2m[hIndex] : null;
+          const rainMm = (hIndex >= 0) ? data.hourly.precipitation[hIndex] : null;
+
+          els.icon.textContent = ui.icon;
+          els.desc.textContent = ui.label;
+
+          els.temp.textContent = cToF(cur.temperature_2m);
+          els.feels.textContent = cToF(cur.apparent_temperature);
+          els.wind.textContent = kmhToMph(cur.wind_speed_10m);
+
+          els.hum.textContent = (hum == null ? "--" : hum);
+          els.rain.textContent = (rainMm == null ? "--" : mmToIn(rainMm));
+
+          const d = new Date();
+          els.updated.textContent = d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+        }catch(err){
+          els.desc.textContent = "Unable to load right now";
+          // keep the widget graceful even if the API is temporarily down
+          console.error(err);
+        }
+      }
+
+      // initial load
+      loadWeather();
+
+      // auto-refresh every 10 minutes
+      setInterval(loadWeather, 10 * 60 * 1000);
+
+      // manual refresh button
+      els.refresh?.addEventListener("click", loadWeather);
+    })();
+  </script>
+
+
+
+<!-- =============================
+     Rating Widget (Bottom-left)
+     ============================= -->
+<aside class="rating-float" aria-label="Rate our newsletter">
+  <div class="rating-card" role="region" aria-live="polite">
+    <div class="rating-top">
+      <div>
+        <div class="rating-kicker">Feedback</div>
+        <div class="rating-title">Rate our newsletter</div>
+      </div>
+      <div class="rating-badge" id="ratingSaved">Saved</div>
+    </div>
+
+    <div class="stars" role="radiogroup" aria-label="Newsletter rating (1 to 5 stars)">
+      <button class="star" type="button" data-value="1" aria-label="1 star">★</button>
+      <button class="star" type="button" data-value="2" aria-label="2 stars">★</button>
+      <button class="star" type="button" data-value="3" aria-label="3 stars">★</button>
+      <button class="star" type="button" data-value="4" aria-label="4 stars">★</button>
+      <button class="star" type="button" data-value="5" aria-label="5 stars">★</button>
+    </div>
+
+    <label class="rating-label" for="ratingComment">Comments (optional)</label>
+    <textarea id="ratingComment" class="rating-comment" rows="3" maxlength="240"
+      placeholder="Tell us what you liked, what could improve, or ideas for future issues…"></textarea>
+
+    <div class="rating-actions">
+      <button class="rating-send" id="ratingSend" type="button">Send</button>
+      <span class="rating-updated">Rating: <strong id="ratingValue">—</strong>/5</span>
+    </div>
+  </div>
+</aside>
+
+<script>
+ window.addEventListener("DOMContentLoaded", () => {
+  const stars = Array.from(document.querySelectorAll(".star"));
+  const ratingValueEl = document.getElementById("ratingValue");
+  const savedBadge = document.getElementById("ratingSaved");
+  const commentEl = document.getElementById("ratingComment");
+  const sendBtn = document.getElementById("ratingSend");
+  const starsWrap = document.querySelector(".stars");
+
+  const STORAGE_KEY = "cbgm_newsletter_rating_v1";
+  const STORAGE_COMMENT = "cbgm_newsletter_comment_v1";
+
+  // IMPORTANT: use let so it updates after click
+  let saved = Number(localStorage.getItem(STORAGE_KEY) || 0);
+
+  function setVisual(value, hoverValue = null) {
+    const active = hoverValue ?? value;
+
+    stars.forEach((btn) => {
+      const v = Number(btn.dataset.value);
+      btn.classList.toggle("is-on", v <= active && active > 0);
+      btn.classList.toggle("is-hover", hoverValue !== null && v === hoverValue);
+    });
+
+    ratingValueEl.textContent = value ? String(value) : "—";
+  }
+
+  function showSaved(show) {
+    savedBadge.style.visibility = show ? "visible" : "hidden";
+    savedBadge.style.color = show ? "rgba(255,255,255,0.92)" : "rgba(255,255,255,0.70)";
+  }
+
+// Load saved (but DO NOT show badge yet)
+const savedComment = localStorage.getItem(STORAGE_COMMENT) || "";
+commentEl.value = savedComment;
+
+showSaved(false);   // <-- always hidden on load
+setVisual(saved);
+
+  // Hover preview (NO TEXT)
+  stars.forEach((btn) => {
+    btn.addEventListener("mouseenter", () => {
+      const hv = Number(btn.dataset.value);
+      setVisual(saved, hv);
+    });
+  });
+
+  // When leaving the star row, revert to saved selection
+  starsWrap.addEventListener("mouseleave", () => {
+    setVisual(saved);
+  });
+
+  // Click to save (and keep stars ON)
+  stars.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const v = Number(btn.dataset.value);
+
+      saved = v; // <-- this is the fix
+      localStorage.setItem(STORAGE_KEY, String(v));
+
+      showSaved(true);
+      setVisual(saved);
+    });
+  });
+
+  // Save comment locally as user types
+  commentEl.addEventListener("input", () => {
+    localStorage.setItem(STORAGE_COMMENT, commentEl.value);
+  });
+
+  // SEND: open Google Form prefill (same logic, no hint text)
+  sendBtn.addEventListener("click", () => {
+    const rating = localStorage.getItem(STORAGE_KEY) || "";
+    const comment = commentEl.value || "";
+
+    if (!rating && !comment) return;
+
+    const FORM_URL = "PASTE_YOUR_GOOGLE_FORM_PREFILL_URL_HERE";
+    if (FORM_URL.startsWith("PASTE_")) return;
+
+    const u = new URL(FORM_URL);
+    // Replace these with your entry IDs from the Google Form
+    u.searchParams.set("entry.RATING_ENTRY_ID", rating);
+    u.searchParams.set("entry.COMMENT_ENTRY_ID", comment);
+
+    window.open(u.toString(), "_blank", "noopener,noreferrer");
+  });
+});
+</script>
+
+<!--=================== 
+    Back to top button
+    =================== -->
+<button class="back-to-top" id="backToTop" type="button" aria-label="Back to top">
+  ↑
+</button>
+
+<script>
+  window.addEventListener("DOMContentLoaded", () => {
+    const btn = document.getElementById("backToTop");
+    if (!btn) return;
+
+    const SHOW_AFTER_PX = 350;
+
+    function onScroll(){
+      if (window.scrollY > SHOW_AFTER_PX) btn.classList.add("is-visible");
+      else btn.classList.remove("is-visible");
+    }
+
+    btn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+  });
+</script>
 
 
     <!-- =====================
@@ -698,5 +993,7 @@
       <div class="muted">© Augusta University • Center for Biotechnology and Genomic Medicine</div>
     </footer>
   </main>
+
 </body>
+
 </html>
