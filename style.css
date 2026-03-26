@@ -821,8 +821,104 @@ section[id]{ scroll-margin-top: 130px; }
 }
 
 /* ========================================================================== */
-/*  WEATHER WIDGET (Floating, bottom-right)                                   */
+/*  WEATHER & FEEDBACK FLOATERS (Floating, bottom-right)                      */
 /* ========================================================================== */
+
+.float-widget{
+  transition: transform 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28), opacity 0.4s ease, box-shadow 0.4s ease;
+  transform-origin: top right;
+}
+
+.float-widget.is-compact{
+  transform: scale(0.58) translate(-46px, -16px);
+  opacity: 0.9;
+  box-shadow: 0 16px 34px rgba(0,0,0,0.18);
+}
+
+.float-widget.is-compact .weather-card,
+.float-widget.is-compact .rating-card{
+  width: 150px;
+  padding: 10px;
+  background: transparent;
+  backdrop-filter: none;
+  box-shadow: none;
+  border-color: rgba(212,175,55,0.50);
+}
+
+.float-widget.is-compact .weather-card{
+  border-radius: 16px;
+}
+
+.float-widget.is-compact .weather-top{
+  margin-bottom: 0;
+}
+
+.float-widget.is-compact .weather-kicker,
+.float-widget.is-compact .weather-badge,
+.float-widget.is-compact .weather-desc,
+.float-widget.is-compact .weather-meta,
+.float-widget.is-compact .weather-foot{
+  display: none;
+}
+
+.float-widget.is-compact .weather-city{
+  font-size: 0.8rem;
+}
+
+.float-widget.is-compact .weather-main{
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 8px 10px;
+  margin-bottom: 0;
+  border-radius: 14px;
+}
+
+.float-widget.is-compact .weather-icon{
+  width: 28px;
+  height: 28px;
+  border-radius: 10px;
+  font-size: 18px;
+}
+
+.float-widget.is-compact .weather-tempValue{
+  font-size: 1.15rem;
+  font-weight: 900;
+}
+
+.float-widget.is-compact .weather-temp{
+  flex-direction: row;
+  align-items: baseline;
+}
+
+.float-widget.is-compact .rating-card{
+  width: 150px;
+  padding: 10px;
+}
+
+.float-widget.is-compact .rating-kicker,
+.float-widget.is-compact .rating-badge,
+.float-widget.is-compact .rating-label,
+.float-widget.is-compact .rating-comment,
+.float-widget.is-compact .rating-actions{
+  display: none;
+}
+
+.float-widget.is-compact .stars{
+  justify-content: center;
+  margin-bottom: 0;
+  gap: 4px;
+  padding: 8px 10px;
+  border-radius: 14px;
+}
+
+.float-widget.is-compact .star{
+  font-size: 18px;
+}
+.float-widget:hover{
+  transform: scale(1);
+  opacity: 1;
+}
 
 .weather-float{
   position: fixed;
@@ -830,6 +926,7 @@ section[id]{ scroll-margin-top: 130px; }
   top: 132px;              /* sits below the sticky topbar */
   z-index: 35;             /* under topbar (40) but above content */
   width: 300px;
+  transition: right 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28), top 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
 }
 
 .weather-card{
@@ -980,6 +1077,7 @@ section[id]{ scroll-margin-top: 130px; }
   bottom: 22px;
   z-index: 35;
   width: 300px;
+  transition: right 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28), bottom 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
 }
 
 .rating-card{
@@ -1226,5 +1324,270 @@ section[id]{ scroll-margin-top: 130px; }
   }
   .card:hover, .link:hover, .chip:hover, .button:hover, .back-to-top:hover{
     transform: none !important;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Condensed floating dock override                                          */
+/* -------------------------------------------------------------------------- */
+
+.float-widget{
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 35;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transform-origin: bottom right;
+  transition: width 240ms ease, transform 240ms ease, opacity 240ms ease;
+}
+
+.weather-float,
+.rating-float{
+  position: relative;
+  top: auto;
+  right: auto;
+  bottom: auto;
+  left: auto;
+  width: 100%;
+  display: block;
+}
+
+.weather-card,
+.rating-card{
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.weather-details,
+.rating-body{
+  overflow: hidden;
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease,
+    max-height 260ms ease,
+    margin 220ms ease,
+    padding 220ms ease;
+}
+
+.rating-topActions{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.rating-compact-toggle{
+  display: inline-flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.92);
+  min-width: 104px;
+  min-height: 38px;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.03em;
+  line-height: 1;
+  text-align: center;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+  transition: opacity 180ms ease, transform 180ms ease, visibility 0s linear 180ms, background-color 180ms ease, border-color 180ms ease;
+}
+
+.float-widget.is-condensed .rating-kicker,
+.float-widget.is-condensed .rating-title,
+.float-widget.is-condensed .rating-badge,
+.float-widget.is-condensed .weather-kicker,
+.float-widget.is-condensed .weather-badge,
+.float-widget.is-condensed .weather-desc{
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease,
+    max-height 180ms ease,
+    margin 180ms ease,
+    padding 180ms ease;
+  opacity: 0;
+  transform: translateY(-4px);
+  max-height: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.float-widget.is-condensed .weather-card,
+.float-widget.is-condensed .rating-card{
+  padding: 12px;
+  background:
+    radial-gradient(120px 90px at 18% 22%, rgba(212,175,55,0.10), transparent 72%),
+    radial-gradient(180px 140px at 88% 18%, rgba(0,174,239,0.06), transparent 72%),
+    linear-gradient(180deg, rgba(10,12,16,0.42), rgba(10,12,16,0.24));
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.12);
+}
+
+.float-widget.is-condensed .weather-top,
+.float-widget.is-condensed .rating-top{
+  margin-bottom: 0;
+  align-items: center;
+}
+
+.float-widget.is-condensed .weather-main{
+  margin-bottom: 0;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.025);
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.float-widget.is-condensed .weather-city{
+  font-size: 14px;
+}
+
+.float-widget.is-condensed .weather-icon{
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  font-size: 22px;
+}
+
+.float-widget.is-condensed .weather-tempValue{
+  font-size: 1.1rem;
+}
+
+.float-widget.is-condensed .weather-temp{
+  flex-direction: column;
+}
+
+.float-widget.is-condensed .weather-details{
+  opacity: 0;
+  transform: translateY(-6px);
+  max-height: 0;
+  margin: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.float-widget.is-condensed .weather-float:hover .weather-details,
+.float-widget.is-condensed .weather-float:focus-within .weather-details{
+  opacity: 1;
+  transform: translateY(0);
+  max-height: 280px;
+  margin-top: 12px;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.float-widget.is-condensed .rating-body{
+  opacity: 0;
+  transform: translateY(-6px);
+  max-height: 0;
+  margin: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.float-widget.is-condensed .rating-float:hover .rating-body,
+.float-widget.is-condensed .rating-float:focus-within .rating-body{
+  opacity: 1;
+  transform: translateY(0);
+  max-height: 480px;
+  margin-top: 10px;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.float-widget.is-condensed .rating-float{
+  width: 176px;
+  align-self: end;
+}
+
+.float-widget.is-condensed .rating-float:hover,
+.float-widget.is-condensed .rating-float:focus-within{
+  width: 300px;
+}
+
+.float-widget.is-condensed .rating-card{
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.float-widget.is-condensed .rating-top{
+  margin-bottom: 0;
+  align-items: center;
+}
+
+.float-widget.is-condensed .rating-topActions{
+  width: 100%;
+  justify-content: center;
+}
+
+.float-widget.is-condensed .rating-compact-toggle{
+  width: 100%;
+  min-width: 0;
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.10);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.float-widget.is-condensed .rating-float:hover .rating-compact-toggle,
+.float-widget.is-condensed .rating-float:focus-within .rating-compact-toggle{
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-2px);
+}
+
+.float-widget.is-condensed .rating-title,
+.float-widget.is-condensed .rating-badge{
+  display: none;
+}
+
+.float-widget.is-condensed .rating-kicker{
+  display: none;
+}
+
+@media (max-width: 1200px){
+  .float-widget{
+    bottom: 12px;
+    right: 12px;
+    left: auto;
+    width: min(300px, calc(100vw - 24px));
+    max-width: calc(100vw - 24px);
+    margin: 0;
+  }
+
+  .float-widget.is-condensed{
+    width: min(176px, calc(100vw - 24px));
+  }
+
+  .weather-float,
+  .rating-float{
+    display: block;
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .float-widget,
+  .weather-card,
+  .weather-main,
+  .weather-details,
+  .rating-card,
+  .rating-body,
+  .rating-compact-toggle,
+  .wxRefresh,
+  .rating-send{
+    transition: none !important;
   }
 }

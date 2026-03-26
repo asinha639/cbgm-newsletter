@@ -1058,6 +1058,7 @@
     <!-- =======================================
          Floating Weather Widget (Augusta, GA)
          ======================================= -->
+  <div class="float-widget" id="floatingDock" data-state="expanded">
   <aside class="weather-float" aria-label="Augusta, GA weather widget">
     <div class="weather-card" role="region" aria-live="polite">
       <div class="weather-top">
@@ -1076,16 +1077,18 @@
         </div>
       </div>
 
-      <div class="weather-meta">
-        <div class="wxRow"><span>Feels</span><strong><span id="wxFeels">--</span>°F</strong></div>
-        <div class="wxRow"><span>Humidity</span><strong><span id="wxHum">--</span>%</strong></div>
-        <div class="wxRow"><span>Wind</span><strong><span id="wxWind">--</span> mph</strong></div>
-        <div class="wxRow"><span>Rain</span><strong><span id="wxRain">--</span> in</strong></div>
-      </div>
+      <div class="weather-details">
+        <div class="weather-meta">
+          <div class="wxRow"><span>Feels</span><strong><span id="wxFeels">--</span>°F</strong></div>
+          <div class="wxRow"><span>Humidity</span><strong><span id="wxHum">--</span>%</strong></div>
+          <div class="wxRow"><span>Wind</span><strong><span id="wxWind">--</span> mph</strong></div>
+          <div class="wxRow"><span>Rain</span><strong><span id="wxRain">--</span> in</strong></div>
+        </div>
 
-      <div class="weather-foot">
-        <span class="wxUpdated">Updated: <span id="wxUpdated">--:--</span></span>
-        <button class="wxRefresh" id="wxRefresh" type="button">Refresh</button>
+        <div class="weather-foot">
+          <span class="wxUpdated">Updated: <span id="wxUpdated">--:--</span></span>
+          <button class="wxRefresh" id="wxRefresh" type="button">Refresh</button>
+        </div>
       </div>
     </div>
   </aside>
@@ -1195,40 +1198,69 @@
 
 
 
-<!-- =============================
-     Rating Widget (Bottom-left)
-     ============================= -->
-<aside class="rating-float" aria-label="Rate our newsletter">
-  <div class="rating-card" role="region" aria-live="polite">
-    <div class="rating-top">
-      <div>
-        <div class="rating-kicker">Feedback</div>
-        <div class="rating-title">Rate our newsletter</div>
+  <!-- =============================
+       Rating Widget
+       ============================= -->
+  <aside class="rating-float" aria-label="Rate our newsletter">
+    <div class="rating-card" role="region" aria-live="polite">
+      <div class="rating-top">
+        <div>
+          <div class="rating-kicker">Feedback</div>
+          <div class="rating-title">Rate our newsletter</div>
+        </div>
+        <div class="rating-topActions">
+          <button class="rating-compact-toggle" type="button" aria-label="Open feedback panel">Feedback</button>
+          <div class="rating-badge" id="ratingSaved">Saved</div>
+        </div>
       </div>
-      <div class="rating-badge" id="ratingSaved">Saved</div>
-    </div>
 
-    <div class="stars" role="radiogroup" aria-label="Newsletter rating (1 to 5 stars)">
-      <button class="star" type="button" data-value="1" aria-label="1 star">★</button>
-      <button class="star" type="button" data-value="2" aria-label="2 stars">★</button>
-      <button class="star" type="button" data-value="3" aria-label="3 stars">★</button>
-      <button class="star" type="button" data-value="4" aria-label="4 stars">★</button>
-      <button class="star" type="button" data-value="5" aria-label="5 stars">★</button>
-    </div>
+      <div class="rating-body">
+        <div class="stars" role="radiogroup" aria-label="Newsletter rating (1 to 5 stars)">
+          <button class="star" type="button" data-value="1" aria-label="1 star">★</button>
+          <button class="star" type="button" data-value="2" aria-label="2 stars">★</button>
+          <button class="star" type="button" data-value="3" aria-label="3 stars">★</button>
+          <button class="star" type="button" data-value="4" aria-label="4 stars">★</button>
+          <button class="star" type="button" data-value="5" aria-label="5 stars">★</button>
+        </div>
 
-    <label class="rating-label" for="ratingComment">Comments (optional)</label>
-    <textarea id="ratingComment" class="rating-comment" rows="3" maxlength="240"
-      placeholder="Tell us what you liked, what could improve, or ideas for future issues…"></textarea>
+        <label class="rating-label" for="ratingComment">Comments (optional)</label>
+        <textarea id="ratingComment" class="rating-comment" rows="3" maxlength="240"
+          placeholder="Tell us what you liked, what could improve, or ideas for future issues…"></textarea>
 
-    <div class="rating-actions">
-      <button class="rating-send" id="ratingSend" type="button">Send</button>
-      <span class="rating-updated">Rating: <strong id="ratingValue">—</strong>/5</span>
+        <div class="rating-actions">
+          <button class="rating-send" id="ratingSend" type="button">Send</button>
+          <span class="rating-updated">Rating: <strong id="ratingValue">—</strong>/5</span>
+        </div>
+      </div>
     </div>
+  </aside>
   </div>
-</aside>
 
 <script>
  window.addEventListener("DOMContentLoaded", () => {
+  const dock = document.getElementById("floatingDock");
+  if (dock) {
+    const CONDENSE_AFTER_PX = 64;
+    let ticking = false;
+
+    const updateDockState = () => {
+      ticking = false;
+      const shouldCondense = window.scrollY > CONDENSE_AFTER_PX;
+      dock.classList.toggle("is-condensed", shouldCondense);
+      dock.dataset.state = shouldCondense ? "condensed" : "expanded";
+    };
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(updateDockState);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    updateDockState();
+  }
+
   const stars = Array.from(document.querySelectorAll(".star"));
   const ratingValueEl = document.getElementById("ratingValue");
   const savedBadge = document.getElementById("ratingSaved");
