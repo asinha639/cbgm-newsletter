@@ -1336,15 +1336,13 @@ setVisual(saved);
 
     if (!rating && !comment) return;
 
-    const FORM_URL = "PASTE_YOUR_GOOGLE_FORM_PREFILL_URL_HERE";
-    if (FORM_URL.startsWith("PASTE_")) return;
+    const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfuJ4QaCDCBg8aE11q01JSamloXv4clioworNXJHG9cXZqdBQ/viewform";
+    const params = new URLSearchParams({
+      "entry.1048115172": rating,
+      "entry.795892865": comment,
+    });
 
-    const u = new URL(FORM_URL);
-    // Replace these with your entry IDs from the Google Form
-    u.searchParams.set("entry.RATING_ENTRY_ID", rating);
-    u.searchParams.set("entry.COMMENT_ENTRY_ID", comment);
-
-    window.open(u.toString(), "_blank", "noopener,noreferrer");
+    window.open(`${FORM_URL}?${params.toString()}`, "_blank", "noopener,noreferrer");
   });
 });
 </script>
