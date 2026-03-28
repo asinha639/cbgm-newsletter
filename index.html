@@ -1058,7 +1058,7 @@
     <!-- =======================================
          Floating Weather Widget (Augusta, GA)
          ======================================= -->
-  <div class="float-widget" id="floatingDock" data-state="expanded">
+  <div class="float-widget is-condensed" id="floatingDock" data-state="condensed">
   <aside class="weather-float" aria-label="Augusta, GA weather widget">
     <div class="weather-card" role="region" aria-live="polite">
       <div class="weather-top">
@@ -1240,25 +1240,14 @@
  window.addEventListener("DOMContentLoaded", () => {
   const dock = document.getElementById("floatingDock");
   if (dock) {
-    const CONDENSE_AFTER_PX = 64;
-    let ticking = false;
-
-    const updateDockState = () => {
-      ticking = false;
-      const shouldCondense = window.scrollY > CONDENSE_AFTER_PX;
-      dock.classList.toggle("is-condensed", shouldCondense);
-      dock.dataset.state = shouldCondense ? "condensed" : "expanded";
+    const keepDockCondensed = () => {
+      dock.classList.add("is-condensed");
+      dock.dataset.state = "condensed";
     };
 
-    const onScroll = () => {
-      if (ticking) return;
-      ticking = true;
-      window.requestAnimationFrame(updateDockState);
-    };
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll, { passive: true });
-    updateDockState();
+    window.addEventListener("scroll", keepDockCondensed, { passive: true });
+    window.addEventListener("resize", keepDockCondensed, { passive: true });
+    keepDockCondensed();
   }
 
   const stars = Array.from(document.querySelectorAll(".star"));
