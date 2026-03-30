@@ -3,23 +3,129 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Photo of the Quarter – Q1 2026</title>
+  <title>Photo of the Quarter</title>
   <link rel="stylesheet" href="style.css"/>
+  <style>
+    .photo-details{
+      max-width: 980px;
+      margin-top: 18px;
+    }
+
+    .photo-details-grid{
+      display: grid;
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .photo-details-title{
+      margin: 0;
+      font-size: clamp(30px, 3.4vw, 40px);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+
+    .photo-page-title{
+      margin-top: 16px;
+      font-size: clamp(24px, 2.4vw, 30px);
+      line-height: 1.15;
+      letter-spacing: -0.015em;
+    }
+
+    .photo-details-meta{
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      color: var(--text);
+      font-size: 15px;
+    }
+
+    .photo-details-meta-row{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 10px;
+      align-items: baseline;
+    }
+
+    .photo-details-label{
+      font-weight: 800;
+      color: rgba(0, 47, 85, 0.82);
+    }
+
+    .photo-details-quote{
+      margin: 0;
+      padding: 16px 18px;
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(0, 47, 85, 0.06), rgba(0, 47, 85, 0.02));
+      border-left: 4px solid rgba(212, 175, 55, 0.92);
+      color: rgba(11, 18, 32, 0.92);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .photo-details-quote em{
+      font-style: italic;
+    }
+
+    .photo-details-quote cite{
+      display: block;
+      margin-top: 8px;
+      font-style: normal;
+      font-weight: 700;
+      color: rgba(91, 101, 118, 0.95);
+    }
+
+    @media (min-width: 760px){
+      .photo-details-grid{
+        grid-template-columns: 1fr 1fr;
+        align-items: start;
+      }
+
+      .photo-details-quote{
+        grid-column: 1 / -1;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="wrap gallery-page" style="padding: 28px 18px;">
     <a class="link" href="index.html#photos">← Back to Newsletter</a>
 
-    <h1 style="margin-top:16px;">Photo of the Quarter</h1>
-    <p class="muted">Quarter 1, 2026</p>
+    <h1 class="photo-page-title">Photo of the Quarter</h1>
 
     <div style="margin-top:16px;">
       <img
         src="images/POTQ_Q1_2026.jpg"
-        alt="Photo of the Quarter – Q1 2026"
-        style="width:100%; max-width: 980px; border-radius: 18px; border: 1px solid rgba(255,255,255,0.10); box-shadow: 0 22px 80px rgba(0,0,0,0.35); display:block;"
+        alt="Ladybug on cherry laurel"
+        style="width:100%; max-width: 760px; margin: 0 auto; border-radius: 18px; border: 1px solid rgba(255,255,255,0.10); box-shadow: 0 22px 80px rgba(0,0,0,0.35); display:block;"
       />
     </div>
+
+    <section class="card photo-details">
+      <h2 class="photo-details-title">Ladybug on cherry laurel</h2>
+
+      <div class="photo-details-grid">
+        <div class="photo-details-meta" aria-label="Photo details">
+          <div class="photo-details-meta-row">
+            <span class="photo-details-label">Photographer:</span>
+            <span>Diane Hopkins</span>
+          </div>
+          <div class="photo-details-meta-row">
+            <span class="photo-details-label">Email:</span>
+            <a class="committee-email" href="mailto:dhopkins@augusta.edu">dhopkins@augusta.edu</a>
+          </div>
+          <div class="photo-details-meta-row">
+            <span class="photo-details-label">Instagram:</span>
+            <span>@diane_i_hopkins</span>
+          </div>
+        </div>
+
+        <blockquote class="photo-details-quote">
+          <em>“There is not a particle of life which does not bear poetry within it.”</em>
+          <cite>— Gustav Flaubert</cite>
+        </blockquote>
+      </div>
+    </section>
   </div>
 </body>
 </html>
